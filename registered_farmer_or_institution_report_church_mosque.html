@@ -39,7 +39,7 @@
                 </div>            
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; <img src="dist/img/logo.png" height="40px" id="logo"></span>
     </header>
-     <h4>Registered Farmers</h4>
+     <h4>Registered Churches/Mosques</h4>
      <section class="inputs">
             <div id="voke">
                  <div id="farmers-div"></div>
@@ -69,7 +69,7 @@
     Populates this data before div with id #new-posts-div
  */
 	$(document).ready(function(){
-		$.get("http://185.141.62.34/api/zero2heroes/load-registered-farmers.php",function(farmers){
+		$.get("http://185.141.62.34/api/zero2heroes/load-registered-churches-mosques.php",function(farmers){
                         document.getElementById("farmers-div").innerHTML = farmers;
                 });	
         });
