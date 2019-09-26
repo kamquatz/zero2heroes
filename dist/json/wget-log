@@ -1,0 +1,3 @@
+--2019-09-25 21:21:40--  https://s3-eu-west-1.amazonaws.com/cfa-openafrica/resources/4fb2e27e-c001-4b7f-b71d-4fee4a96a0f8/kenyan-counties.geojson?AWSAccessKeyId=AKIAJLBCGJZT6AY47RSA
+Resolving s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)... failed: Temporary failure in name resolution.
+wget: unable to resolve host address ‘s3-eu-west-1.amazonaws.com’
