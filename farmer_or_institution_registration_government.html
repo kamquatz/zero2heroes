@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Zerotwoheroes | Government Institution Registration</title>
+    <link rel='shortcut icon' href='dist/img/favicon.ico' type='image/x-icon' />
+    <link rel="stylesheet" href="dist/css/style.css">
+    <link rel="stylesheet" href="dist/css/land_owner.css">
+    <link rel="stylesheet" href="dist/css/custom.css">
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+    <style>
+   
+                h4{
+                    text-align: left;
+                    color: black;
+                    font-family: Bahnschrift Light;
+                    font-weight: bold;
+                }
+            
+            </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+           
+        <div id="myNav" class="overlay">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <div class="overlay-content">
+                    <a href="index.html">Home</a> 
+                    <a href="about.html"> About</a>
+                    <a href="contact.html"> Contact</a>
+                    <a href="index.html"><img src="dist/img/logout.png" width="30px" height="30px">logout</a>
+                </div>
+            </div>
+    
+        </div>            
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; <img src="dist/img/logo.png" height="40px" id="logo"></span>
+</header>
+        <h4>Enter Details of the Government Institution</h4>
+        <section class="inputs">
+                <form id="community" method="POST">
+                       <div id="voke">
+                        <div>
+                        <h3>Institution Name</h3>                                
+                                <input type="text" required id="community_name" name="community_name" placeholder="Community name..">
+                        </div>
+                        <h3>Record the details of the Person incharge of the Farm</h3>
+                <div>
+                   <p>First Name</p>
+                    <input type="text" required id="fname" name="firstname" placeholder="Your First name..">
+                </div>
+                <div>
+                        <p>Middle Name</p>
+                        <input type="text" id="mname" name="fmiddlename" placeholder="Your middle name..">
+                    
+                </div>
+                <div>
+                        <p>Last Name</p>
+                        <input type="text" required id="lname" name="lastname" placeholder="Your Last name..">
+                    
+                </div>
+                <div>
+                        <p>Mobile Number</p>
+                        <input type="text" required id="num" name="num" placeholder="contact details..">
+                    
+                </div>
+                <div>
+                        <p>Id Number</p>
+                        <input required type="text" id="idnum" name="idnum" placeholder="id number..">
+                    
+                </div>
+                <div>
+                        <p>Select Gender</p>
+                        <input type="radio" name="gender" value="male" checked> Male<br>
+                        <input type="radio" name="gender" value="female"> Female<br>
+                  
+                </div>
+                <div id="counties-div"></div>
+                <div id="sub-counties-div"></div>
+                <div id="wards-div"></div>
+                <div>
+                        <p>Plot Number</p>
+                        <input type="text" id="pnum" name="pnum" placeholder="include ref">
+                    
+                </div>
+                <div>
+                        <p>Size</p>
+                        <input type="text" id="size" name="size" placeholder="units in acres..">
+                    
+                </div>
+                <h4>Farm's Crop Registration Section</h4>
+                <div id="crop-type-div"></div>
+                <div id="seed-variety-div"></div>
+                <div>
+                        <p>Crop name (can be scientific or local name )</p>
+                        <input type="text" id="crop_name" name="crop_name" placeholder="crop name..">
+                    
+                </div>
+                <h4>Farm's Livestock Registration </h4>
+                
+                <div id="livestock-type-div"></div>
+                <div>
+                        <p>total number of livestock</p>
+                        <input type="number" value="0" id="livestocknumber" name="livestocknumber" placeholder="number..">
+                    
+                </div>
+                <div id="livestock-output-div"></div>
+                <input type="submit" value="Submit">
+            </form>
+
+        </section>
+  
+
+       
+        <footer>
+            <p>ZeroTwoHeroes limited, Copyright &copy; 2019 follows us on ..
+           <a href="https://facebook.com/ZeroTwoHeroes" ><img src="dist/img//facebook.png" width="40px" height="40px"></a>
+           <a href="https://twitter.com/ZeroTwoHeroes"  ><img src="dist/img//twitter.png" width="40px" height="40px" ></a>
+           </p>
+         </footer>
+<script src="dist/js/main.js"></script>
+<script src="dist/js/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script>
+/**
+    This function loads on page ready 
+    Populates all counties in ascending order
+    Loads data from load-counties.php 
+    Populates this data before div with id #new-posts-div
+ */
+	$(document).ready(function(){
+		$.get("http://185.141.62.34/api/zero2heroes/load-counties.php",function(counties){
+                        document.getElementById("counties-div").innerHTML = counties;
+                });
+                $.get("http://185.141.62.34/api/zero2heroes/load-crop-type.php",function(cropType){
+                        document.getElementById("crop-type-div").innerHTML = cropType;
+                });
+                $.get("http://185.141.62.34/api/zero2heroes/load-seed-variety.php?crop_type_id="+1,
+                function(seedVariety){
+                        document.getElementById("seed-variety-div").innerHTML = seedVariety;
+                });
+                $.get("http://185.141.62.34/api/zero2heroes/load-livestock-type.php",function(livestockType){
+                        document.getElementById("livestock-type-div").innerHTML = livestockType;
+                });
+                $.get("http://185.141.62.34/api/zero2heroes/load-livestock-output.php",function(livestockOutput){
+                        document.getElementById("livestock-output-div").innerHTML = livestockOutput;
+                });
+	
+        });
+        
+        function PopulateSubCounty(){
+                var e = document.getElementById("county");
+                var selectedCountyId = e.options[e.selectedIndex].value;
+                $.get("http://185.141.62.34/api/zero2heroes/load-sub-counties.php?county_id="+selectedCountyId,
+                function(subCounties){
+                        document.getElementById("sub-counties-div").innerHTML = subCounties;
+                });
+                
+                $.get("http://185.141.62.34/api/zero2heroes/load-wards.php?sub_county_id="+1,
+                function(wards){
+                        document.getElementById("wards-div").innerHTML = wards;
+		});
+        }
+
+        function PopulateWards(){
+                var e = document.getElementById("sub_county");
+                var selectedSubCountyId = e.options[e.selectedIndex].value;
+                $.get("http://185.141.62.34/api/zero2heroes/load-wards.php?sub_county_id="+selectedSubCountyId,
+                function(wards){
+                        document.getElementById("wards-div").innerHTML = wards;
+		});
+        }
+
+
+        function PopulateSeedVariety(){
+                var e = document.getElementById("crop_type");
+                var selectedCropTypeId = e.options[e.selectedIndex].value;
+                $.get("http://185.141.62.34/api/zero2heroes/load-seed-variety.php?crop_type_id="+selectedCropTypeId,
+                function(seedVariety){
+                        document.getElementById("seed-variety-div").innerHTML = seedVariety;
+		});
+        }
+
+      $(function () {
+        $('form').on('submit', function (e) {
+          e.preventDefault();
+          $.ajax({
+            type: 'post',
+            url: 'http://185.141.62.34/api/zero2heroes/persist-government.php',
+            data: $('form').serialize(),
+            success: function (response) {
+              alert('Government Institution data submitted successfully\n'+response);
+              window.location.href = "farm_registration.html";
+            }
+          });
+
+        });
+
+      });
+</script>
+</body>
+</html>
